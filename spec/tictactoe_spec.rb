@@ -49,11 +49,11 @@ describe TicTacToe do
 
     it "adds a second move after the first" do
         tictactoe = TicTacToe.new
-        tictactoe.grid = [
+        tictactoe.changeGrid([
             ["X","",""],
             ["","",""],
             ["","",""]
-        ]
+        ])
 
         example_second_move = [
             ["X","",""],
@@ -66,7 +66,6 @@ describe TicTacToe do
 
     end
 
-    # add changeGrid method to tictactoe.rb
     # next step: stop player overwriting already played box
 
 end
