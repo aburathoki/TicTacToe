@@ -17,4 +17,7 @@
         return @grid
     end
 
+    def changeGrid(newGrid)
+        @grid = newGrid
+    end
  end
