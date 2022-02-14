@@ -66,4 +66,7 @@ describe TicTacToe do
 
     end
 
+    # add changeGrid method to tictactoe.rb
+    # next step: stop player overwriting already played box
+
 end
