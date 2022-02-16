@@ -1,0 +1,5 @@
+1. library of winning combination 
+ example : if someone makes a move , checks if it is a winning combination from the library of grids 
+    --  check if there are more moves left to play 
+
+2.

@@ -90,8 +90,43 @@ it "allows a move onto an empty square" do
         ])
     attempted_move = tictactoe.verify_move?("O", row:0 , column: 2)    
     expect(attempted_move).to eq(true)
-    end
+end
+
+it "attempts illegal move" do 
+    tictactoe = TicTacToe.new
+    tictactoe.changeGrid([[
+        "X","",""],
+        ["","",""],
+        ["","",""]
+    ])
+
+   unchanged_grid = [[
+        "X","",""],
+        ["","",""],
+        ["","",""]
+    ]
+attempted_move = tictactoe.addMove("O", row:0, column:0)
+expect(attempted_move).to eq(unchanged_grid)
 
 
-    # string verify and add methods together
+end 
+
+it "attempts legal move" do 
+    tictactoe = TicTacToe.new
+    tictactoe.changeGrid([[
+        "X","",""],
+        ["","",""],
+        ["","",""]
+    ])
+
+   changed_grid = [[
+        "X","O",""],
+        ["","",""],
+        ["","",""]
+    ]
+attempted_move = tictactoe.addMove("O", row:0, column:1)
+expect(attempted_move).to eq(changed_grid)
+end 
+
+
 end

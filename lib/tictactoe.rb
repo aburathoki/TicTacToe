@@ -14,8 +14,12 @@
     end
 
     def addMove(move,row:, column:)
+    if verify_move?(move,row:row,column:column)
         @grid[row][column] = move
         return @grid
+    else 
+         return @grid
+    end
     end
 
     def changeGrid(newGrid)
