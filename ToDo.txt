@@ -1,5 +1,13 @@
-1. library of winning combination 
- example : if someone makes a move , checks if it is a winning combination from the library of grids 
-    --  check if there are more moves left to play 
 
-2.
+
+2. check who will be playing ( AI OR PLAYER)
+   -- Track the moves --
+   –– make sure if player is playing enter "x", AI enter "O: remove that as option from addMove/verifyMove functions
+
+
+Standard IO streams
+stdin (input)
+stdout (output)
+https://www.rubyguides.com/2019/02/ruby-io/
+rspec methods 
+e.g. expect{tictactoe.input}.to output("Player it is your turn").to_stdout

@@ -1,20 +1,6 @@
 require_relative '../lib/tictactoe'
 
 describe TicTacToe do
-     
-    it "return grid at start of the game" do 
-        # arrange new version of the class
-        tictactoe = TicTacToe.new
-        start_grid_test = [
-            ["","",""],
-            ["","",""],
-            ["","",""]
-        ]
-        # act 0 moves new game
-        initial_grid = tictactoe.return_current_grid
-        # assert 
-        expect(initial_grid).to eq(start_grid_test)
-    end
 
     it "adds first move to grid" do 
         # arrange
@@ -124,9 +110,9 @@ it "attempts legal move" do
         ["","",""],
         ["","",""]
     ]
-attempted_move = tictactoe.addMove("O", row:0, column:1)
-expect(attempted_move).to eq(changed_grid)
+    attempted_move = tictactoe.addMove("O", row:0, column:1)
+    
+    expect(attempted_move).to eq(changed_grid)
 end 
-
 
 end
