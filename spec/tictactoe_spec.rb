@@ -5,7 +5,11 @@ describe TicTacToe do
     it "return grid at start of the game" do 
         # arrange new version of the class
         tictactoe = TicTacToe.new
-        start_grid_test = [["","",""],["","",""],["","",""]]
+        start_grid_test = [
+            ["","",""],
+            ["","",""],
+            ["","",""]
+        ]
         # act 0 moves new game
         initial_grid = tictactoe.return_current_grid
         # assert 
@@ -32,8 +36,6 @@ describe TicTacToe do
     it "adds alternative move to grid " do
         # arrange
         tictactoe1 = TicTacToe.new
-
-        puts "******** #{tictactoe1.return_current_grid}"
 
         example_first_move1 = [
                 ["","O",""],
@@ -66,6 +68,30 @@ describe TicTacToe do
 
     end
 
-    # next step: stop player overwriting already played box
+it "doesn't allow move on same square" do
+        tictactoe = TicTacToe.new
+        tictactoe.changeGrid([
+            ["X","",""],
+            ["","",""],
+            ["","",""]
+        ])
+    
+    attempted_move = tictactoe.verify_move?("O", row:0 , column: 0)
+    expect(attempted_move).to eq(false)
+    
+end
 
+it "allows a move onto an empty square" do
+    tictactoe = TicTacToe.new
+        tictactoe.changeGrid([
+            ["X","",""],
+            ["","",""],
+            ["","",""]
+        ])
+    attempted_move = tictactoe.verify_move?("O", row:0 , column: 2)    
+    expect(attempted_move).to eq(true)
+    end
+
+
+    # string verify and add methods together
 end
