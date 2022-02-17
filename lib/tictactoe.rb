@@ -72,8 +72,11 @@
      false
     end
 
+  def verify_draw?
+    has_move_to_play = @grid.flatten.include? "" 
+    return !has_move_to_play
 
 
-
- end
+  end
  
+end

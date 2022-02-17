@@ -94,4 +94,52 @@ describe TicTacToe do
         end
     end    
 
+   context "confirm draw" do 
+    it "checks to see if game drawn" do
+        tictactoe = TicTacToe.new
+        tictactoe.changeGrid([
+            ["X","X","O"],
+            ["O","O","X"],
+            ["X","O","X"]
+        ])
+
+        game_drawn = tictactoe.verify_draw?
+
+        expect(game_drawn).to eq(true)
+
+    end
+
+    it "checks to see if game drawn" do
+        tictactoe = TicTacToe.new
+        tictactoe.changeGrid([
+            ["X","X","O"],
+            ["O","O","X"],
+            ["X","O",""]
+        ])
+
+        game_drawn = tictactoe.verify_draw?
+
+        expect(game_drawn).to eq(false)
+
+    end
+end
+
+context "confirm win" do 
+    it "checks to see if game drawn" do
+        tictactoe = TicTacToe.new
+        tictactoe.changeGrid([
+            ["X","X","O"],
+            ["O","O","O"],
+            ["X","O","X"]
+        ])
+
+        game_won = tictactoe.verify_win?
+
+        expect(game_won).to eq(true)
+
+    end
+
+end
+
+
 end
