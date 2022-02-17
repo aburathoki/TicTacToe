@@ -115,4 +115,40 @@ it "attempts legal move" do
     expect(attempted_move).to eq(changed_grid)
 end 
 
+it "makes a player move" do 
+    tictactoe = TicTacToe.new
+    tictactoe.changeGrid([
+        ["","",""],
+        ["","",""],
+        ["","",""]
+    ])
+
+   attempted_player_move = [
+        ["X","",""],
+        ["","",""],
+        ["","",""]
+    ]
+    player_move = tictactoe.play_move(row:0, column:0)
+    
+    expect(player_move).to eq(attempted_player_move)
+end 
+
+it "makes a computer move" do 
+    tictactoe = TicTacToe.new
+    tictactoe.changeGrid([
+        ["","",""],
+        ["","",""],
+        ["","",""]
+    ])
+
+   attempted_computer_move = [
+        ["O","",""],
+        ["","",""],
+        ["","",""]
+    ]
+    computer_move = tictactoe.computer_move(row:0, column:0)
+    
+    expect(computer_move).to eq(attempted_computer_move)
+end 
+
 end

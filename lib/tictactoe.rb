@@ -75,8 +75,18 @@
   def verify_draw?
     has_move_to_play = @grid.flatten.include? "" 
     return !has_move_to_play
+  end
 
+  def verify_win?
+    return verify_win_by_row? || verify_win_by_column? || verify_win_by_LR_diagonal?
+  end
 
+  def play_move(row:, column:)
+    addMove("X",row: row, column: column)
+  end
+
+  def computer_move(row:, column:)
+    addMove("O", row: row, column: column)
   end
  
 end

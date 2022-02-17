@@ -125,7 +125,7 @@ describe TicTacToe do
 end
 
 context "confirm win" do 
-    it "checks to see if game drawn" do
+    it "checks to see if game won" do
         tictactoe = TicTacToe.new
         tictactoe.changeGrid([
             ["X","X","O"],
@@ -136,6 +136,20 @@ context "confirm win" do
         game_won = tictactoe.verify_win?
 
         expect(game_won).to eq(true)
+
+    end
+
+    it "checks to see if game won" do
+        tictactoe = TicTacToe.new
+        tictactoe.changeGrid([
+            ["X","X","O"],
+            ["O","O",""],
+            ["X","O",""]
+        ])
+
+        game_won = tictactoe.verify_win?
+
+        expect(game_won).to eq(false)
 
     end
 
