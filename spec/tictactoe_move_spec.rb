@@ -4,7 +4,13 @@ describe TicTacToe do
 
     it "adds first move to grid" do 
         # arrange
-        tictactoe = TicTacToe.new
+
+        start_test_grid = [
+            ["","",""],
+            ["","",""],
+            ["","",""]
+        ]
+        tictactoe = TicTacToe.new(start_test_grid, true)
         example_first_move = [
             ["X","",""],
             ["","",""],
@@ -21,7 +27,12 @@ describe TicTacToe do
 
     it "adds alternative move to grid " do
         # arrange
-        tictactoe1 = TicTacToe.new
+        start_test_grid = [
+            ["","",""],
+            ["","",""],
+            ["","",""]
+        ]
+        tictactoe1 = TicTacToe.new(start_test_grid, true)
 
         example_first_move1 = [
                 ["","O",""],
@@ -36,13 +47,13 @@ describe TicTacToe do
     end
 
     it "adds a second move after the first" do
-        tictactoe = TicTacToe.new
-        tictactoe.changeGrid([
+    
+       start_test_grid = ([
             ["X","",""],
             ["","",""],
             ["","",""]
         ])
-
+        tictactoe = TicTacToe.new(start_test_grid, false)
         example_second_move = [
             ["X","",""],
             ["","",""],
@@ -55,12 +66,12 @@ describe TicTacToe do
     end
 
 it "doesn't allow move on same square" do
-        tictactoe = TicTacToe.new
-        tictactoe.changeGrid([
-            ["X","",""],
-            ["","",""],
-            ["","",""]
-        ])
+    start_test_grid = ([
+        ["X","",""],
+        ["","",""],
+        ["","",""]
+    ])
+    tictactoe = TicTacToe.new(start_test_grid, false)
     
     attempted_move = tictactoe.verify_move?(row:0 , column: 0)
     expect(attempted_move).to eq(false)
@@ -68,23 +79,24 @@ it "doesn't allow move on same square" do
 end
 
 it "allows a move onto an empty square" do
-    tictactoe = TicTacToe.new
-        tictactoe.changeGrid([
-            ["X","",""],
-            ["","",""],
-            ["","",""]
-        ])
+    start_test_grid = ([
+        ["X","",""],
+        ["","",""],
+        ["","",""]
+    ])
+    tictactoe = TicTacToe.new(start_test_grid, false)
     attempted_move = tictactoe.verify_move?(row:0 , column: 2)    
     expect(attempted_move).to eq(true)
 end
 
 it "makes a player move" do 
-    tictactoe = TicTacToe.new
-    tictactoe.changeGrid([
-        ["","",""],
-        ["","",""],
-        ["","",""]
-    ])
+    
+    start_test_grid = [
+            ["","",""],
+            ["","",""],
+            ["","",""]
+        ]
+    tictactoe = TicTacToe.new(start_test_grid, true)
 
    attempted_player_move = [
         ["X","",""],
@@ -97,13 +109,12 @@ it "makes a player move" do
 end 
 
 it "makes a computer move" do 
-    tictactoe = TicTacToe.new
-    tictactoe.changeGrid([
+    start_test_grid = [
         ["","",""],
         ["","",""],
         ["","",""]
-    ])
-
+    ]
+   tictactoe = TicTacToe.new(start_test_grid, false)
    attempted_computer_move = [
         ["O","",""],
         ["","",""],
@@ -114,8 +125,13 @@ it "makes a computer move" do
     expect(computer_move).to eq(attempted_computer_move)
 end 
 it "makes correct move" do
-    tictactoe = TicTacToe.new
-    tictactoe.player_to_play = true
+    start_test_grid = [
+            ["","",""],
+            ["","",""],
+            ["","",""]
+        ]
+    tictactoe = TicTacToe.new(start_test_grid, true)
+    
     attempted_player_move = [
         ["X","",""],
         ["","",""],
@@ -126,8 +142,12 @@ it "makes correct move" do
 end
 
 it "makes correct move" do
-    tictactoe = TicTacToe.new
-    tictactoe.player_to_play = false
+    start_test_grid = [
+            ["","",""],
+            ["","",""],
+            ["","",""]
+        ]
+    tictactoe = TicTacToe.new(start_test_grid, false)
     attempted_computer_move = [
         ["","",""],
         ["","O",""],
@@ -138,92 +158,93 @@ it "makes correct move" do
 end
 
 it "changes player turn after move" do
-    tictactoe = TicTacToe.new
-    tictactoe.player_to_play = true
+    start_test_grid = [
+            ["","",""],
+            ["","",""],
+            ["","",""]
+        ]
+    tictactoe = TicTacToe.new(start_test_grid, true)
     attempted_move = tictactoe.attempt_move(row:0, column:0)
     expect(tictactoe.player_to_play).to eq(false)
 end
 
 it "changes player turn" do
-    tictactoe = TicTacToe.new
-    tictactoe.changeGrid([
-        ["X","",""],
-        ["","",""],
-        ["","",""]
-    ])
-    tictactoe.player_to_play = false 
+    start_test_grid = [
+            ["X","",""],
+            ["","",""],
+            ["","",""]
+        ]
+    tictactoe = TicTacToe.new(start_test_grid, false)
     attempted_move = tictactoe.attempt_move(row:0, column:1)
     expect(tictactoe.player_to_play).to eq(true)
 end
 
 it " doesn't change player turn in invalid move" do
-    tictactoe = TicTacToe.new
-    tictactoe.changeGrid([
+    
+    start_test_grid = [
         ["X","O",""],
         ["","",""],
         ["","",""]
-    ])
-    tictactoe.player_to_play = false 
+    ]
+    tictactoe = TicTacToe.new(start_test_grid, false)
     attempted_move = tictactoe.attempt_move(row:0, column:1)
     expect(tictactoe.player_to_play).to eq(false)
 end
 
 it "returns win symbol for player" do
-    tictactoe = TicTacToe.new
-    tictactoe.changeGrid([
+    
+    start_test_grid = [ 
         ["X","O",""],
         ["","X","O"],
         ["","",""]
-    ])
-    tictactoe.player_to_play = true 
+    ]
+    tictactoe = TicTacToe.new(start_test_grid, true)
     attempted_move = tictactoe.attempt_move(row:2, column:2)
     expect(attempted_move).to eq(:player_win)
 end
 
 it "returns win symbol for AI" do
-    tictactoe = TicTacToe.new
-    tictactoe.changeGrid([
+    
+    start_test_grid = [ 
         ["X","O","X"],
         ["","O","O"],
         ["X","","X"]
-    ])
-    tictactoe.player_to_play = false 
+    ]
+    tictactoe = TicTacToe.new(start_test_grid, false)
     attempted_move = tictactoe.attempt_move(row:1, column:0)
     expect(attempted_move).to eq(:ai_win)
 end
 
 it "returns draw" do
-    tictactoe = TicTacToe.new
-    tictactoe.changeGrid([
+    
+    start_test_grid = [
         ["O","X","O"],
         ["O","X","X"],
         ["X","O",""]
-    ])
-    tictactoe.player_to_play = true 
+    ]
+    tictactoe = TicTacToe.new(start_test_grid, true)
     attempted_move = tictactoe.attempt_move(row:2, column:2)
     expect(attempted_move).to eq(:draw)
 end
 
 it "returns next move" do
-    tictactoe = TicTacToe.new
-    tictactoe.changeGrid([
+  start_test_grid = [
         ["X","X",""],
         ["","","O"],
         ["","",""]
-    ])
-    tictactoe.player_to_play = false 
+    ]
+    tictactoe = TicTacToe.new(start_test_grid, false)
     attempted_move = tictactoe.attempt_move(row:2, column:2)
     expect(attempted_move).to eq(:next_move)
 end
 
 it "returns illegal move" do
-    tictactoe = TicTacToe.new
-    tictactoe.changeGrid([
+    start_test_grid = [
         ["X","X",""],
         ["","","O"],
         ["","","O"]
-    ])
-    tictactoe.player_to_play = true 
+    ]
+    tictactoe = TicTacToe.new(start_test_grid, false)
     attempted_move = tictactoe.attempt_move(row:2, column:2)
     expect(attempted_move).to eq(:illegal_move)
 end

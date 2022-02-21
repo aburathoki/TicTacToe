@@ -2,24 +2,6 @@ require_relative '../lib/ai'
 
 describe AI do
 
-    # it "makes smart move" do 
-    #     # arrange
-    #     ai = AI.new
-    #     example_grid = [
-    #         ["X","",""],
-    #         ["","O",""],
-    #         ["","O","X"]
-    #     ]
-    #     expected_grid =  [
-    #         ["X","O",""],
-    #         ["","O",""],
-    #         ["","O","X"]]
-    #     # act
-    #     grid_after_move = ai.make_move(example_grid)
-    
-    #     # assert 
-    #     expect(grid_after_move).to eq(expected_grid)
-    # end
         it "gets available moves" do
             ai = AI.new(
                 [
@@ -40,6 +22,7 @@ describe AI do
                 ["","","O"],
                 ["X","O","X"]
             ])
+
          available_moves = [[1,0],[1,1]]
 
         #  act
@@ -49,8 +32,5 @@ describe AI do
 
         expect(move_rankings).to eq([0,1])
        
-         
-        
-        
         end
     end

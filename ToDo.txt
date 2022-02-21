@@ -1,8 +1,13 @@
-1. check who will be playing ( AI OR PLAYER)
-   -- Track the moves --
-   –– make sure if player is playing enter "x", AI enter "O: remove that as option from addMove/verifyMove functions
+// To do
 
-   
+1) Change tictactoe class name to e.g. GAmeRules
+2) Game class needs to manage state of game, 
+   - toggle player_to_play (this might need to be removed from TicTacToe class as well)
+   – Game needs to get grid from icTacTo class at end of move
+3) Return to AI!!!!
+
+
+# Reading stuff
 
 
 Standard IO streams

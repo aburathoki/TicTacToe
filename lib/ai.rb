@@ -6,9 +6,7 @@ class AI
 
     def initialize(grid)
         @grid = grid
-        @tictactoe = TicTacToe.new 
-        @tictactoe.changeGrid(grid)
-        @tictactoe.player_to_play = false
+        @tictactoe = TicTacToe.new(grid, false)
     end 
 
     def make_move(grid)

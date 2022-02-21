@@ -1,17 +1,13 @@
  class TicTacToe
 
     attr_accessor :grid, :player_to_play
-    def initialize(grid = [
-        ["","",""],
-        ["","",""],
-        ["","",""]
-    ])
+    def initialize(grid, player_to_play)
       @grid = grid
-      @player_to_play = true
+      @player_to_play = player_to_play
     end
     
     def return_current_grid
-        return @grid
+        @grid
     end
 
     def addMove(move,row:, column:)
@@ -69,30 +65,30 @@
      false
     end
 
-  def verify_draw?
-    has_move_to_play = @grid.flatten.include? "" 
-    return !has_move_to_play
-  end
-
-  def verify_win?
-    return verify_win_by_row? || verify_win_by_column? || verify_win_by_LR_diagonal?
-  end
-
-  def player_move(row:, column:)
-    addMove("X",row: row, column: column)
-  end
-
-  def computer_move(row:, column:)
-    addMove("O", row: row, column: column)
-  end
-  
-  def play_move(row:, column:)
-    if @player_to_play
-        player_move(row: row, column: column)
-    else 
-        computer_move(row: row, column: column)
+    def verify_draw?
+        has_move_to_play = @grid.flatten.include? "" 
+        return !has_move_to_play
     end
-end
+
+    def verify_win?
+        return verify_win_by_row? || verify_win_by_column? || verify_win_by_LR_diagonal?
+    end
+
+    def player_move(row:, column:)
+        addMove("X",row: row, column: column)
+    end
+
+    def computer_move(row:, column:)
+        addMove("O", row: row, column: column)
+    end
+  
+    def play_move(row:, column:)
+        if @player_to_play
+            player_move(row: row, column: column)
+        else 
+            computer_move(row: row, column: column)
+        end
+    end
 
     def attempt_move(row:, column:)
         if verify_move?(row: row, column: column)
