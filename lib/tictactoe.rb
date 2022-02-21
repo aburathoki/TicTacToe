@@ -1,12 +1,13 @@
  class TicTacToe
 
-    attr_accessor :grid
+    attr_accessor :grid, :player_to_play
     def initialize(grid = [
         ["","",""],
         ["","",""],
         ["","",""]
     ])
       @grid = grid
+      @player_to_play = true
     end
     
     def return_current_grid
@@ -14,19 +15,15 @@
     end
 
     def addMove(move,row:, column:)
-    if verify_move?(move,row:row,column:column)
         @grid[row][column] = move
         return @grid
-    else 
-         return @grid
-    end
     end
 
     def changeGrid(newGrid)
         @grid = newGrid
     end
 
-    def verify_move? (move,row:, column:)
+    def verify_move?(row:, column:)
         if @grid[row][column] == ""
             return true
         else 
@@ -81,12 +78,37 @@
     return verify_win_by_row? || verify_win_by_column? || verify_win_by_LR_diagonal?
   end
 
-  def play_move(row:, column:)
+  def player_move(row:, column:)
     addMove("X",row: row, column: column)
   end
 
   def computer_move(row:, column:)
     addMove("O", row: row, column: column)
   end
- 
+  
+  def play_move(row:, column:)
+    if @player_to_play
+        player_move(row: row, column: column)
+    else 
+        computer_move(row: row, column: column)
+    end
+end
+
+    def attempt_move(row:, column:)
+        if verify_move?(row: row, column: column)
+            play_move(row: row, column: column)
+            if verify_win?
+                # puts "#{@player_to_play ? "player" : "AI"} wins!"
+                return @player_to_play ? :player_win : :ai_win
+            elsif verify_draw?
+                return :draw
+            else 
+                @player_to_play = !@player_to_play
+                return :next_move
+            end 
+        else 
+            return :illegal_move
+        end
+    end
+    
 end
