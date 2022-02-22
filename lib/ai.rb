@@ -9,7 +9,6 @@ class AI
         # @tictactoe = TicTacToe.new(grid, false)
     end 
 
-
     # 1
 
     def check_grid_for_terminal(grid,player_to_play) 
@@ -42,6 +41,9 @@ class AI
 
     # 3
 
+
+    # https://www.freecodecamp.org/news/how-to-make-your-tic-tac-toe-game-unbeatable-by-using-the-minimax-algorithm-9d690bad4b37/
+
     def minimax(grid, player_to_play)
 
         available_moves = get_available_moves(grid)
@@ -55,9 +57,25 @@ class AI
             moves = []
 
             for available_moves.each do |move|
+                
+                move_dict = {}
 
+                move_dict["co-ord"] = move
+
+                # make move in the avilable move spot (probably need to make a new class of TicTacToe)
+                    # declare class of tictactoe
+                    # run play_move method to change board
+
+                # get new grid and run minimax function again, and set it to the result (this is where it's getting recursive!)
+                    # run minimax again and set it to variable claled result
+                    # add item to dictionary: move_dict["score"] = result
+
+                # add dictionary to array of moves
             end
 
+            # do the best mvoe stuff
+
+            # return best move
         end
     end
 
