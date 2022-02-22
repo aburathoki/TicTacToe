@@ -56,7 +56,7 @@ class AI
 
             moves = []
 
-            for available_moves.each do |move|
+            available_moves.each do |move|
                 
                 move_dict = {}
 

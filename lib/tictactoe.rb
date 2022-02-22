@@ -94,7 +94,6 @@
         if verify_move?(row: row, column: column)
             play_move(row: row, column: column)
             if verify_win?
-                # puts "#{@player_to_play ? "player" : "AI"} wins!"
                 return @player_to_play ? :player_win : :ai_win
             elsif verify_draw?
                 return :draw
