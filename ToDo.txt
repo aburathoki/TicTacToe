@@ -1,4 +1,4 @@
-// To do
+# To do
 
 1) Change tictactoe class name to e.g. GAmeRules
 2) Game class needs to manage state of game, 
@@ -8,7 +8,6 @@
 
 
 # Reading stuff
-
 
 Standard IO streams
 stdin (input)

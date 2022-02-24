@@ -46,20 +46,18 @@ class AI
 
     def minimax(grid, player_to_play)
 
-        available_moves = get_available_moves(grid)
-
         result = check_grid_for_terminal(grid, player_to_play)
 
         if result != nil
             return result
         else 
+            available_moves = get_available_moves(grid)
 
             moves = []
 
             available_moves.each do |move|
                 
                 move_dict = {}
-
                 move_dict["co-ord"] = move
 
                 # make move in the avilable move spot (probably need to make a new class of TicTacToe)
@@ -71,14 +69,15 @@ class AI
                     # add item to dictionary: move_dict["score"] = result
 
                 # add dictionary to array of moves
+            
             end
 
             # do the best mvoe stuff
 
             # return best move
+            nil
         end
     end
-
 
 
     # def rank_moves(grid)
@@ -107,6 +106,4 @@ class AI
     #     return move_scores
     # end 
     
-   
-
 end

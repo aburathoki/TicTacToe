@@ -109,7 +109,28 @@ describe AI do
                 )
         end
  
-
         # 3
+        it "exits minimax function" do
+            grid = [
+                ["X","O","X"],
+                ["O","O","X"],
+                ["","","X"]
+            ]
+            ai = AI.new(grid)   
+            minimax_result = ai.minimax(grid, false)
+            expect(minimax_result).not_to eql(nil)
+        end
+
+        it "Continues minimax recursion" do
+            grid = [
+                ["X","O","X"],
+                ["O","",""],
+                ["O","","X"]
+            ]
+            ai = AI.new(grid)   
+            minimax_result = ai.minimax(grid, false)
+            expect(minimax_result).to eq(nil)
+        end
+        
 
     end
