@@ -53,23 +53,27 @@ class AI
         else 
             available_moves = get_available_moves(grid)
 
-            moves = []
+            moves = [] # an array of those hashes [{co-ord, score}]
 
             available_moves.each do |move|
-                
-                move_dict = {}
-                move_dict["co-ord"] = move
+                # we're creating a hash {co-ord, score}
+                move_hash = {}
+                move_hash[:coord] = move
 
                 # make move in the avilable move spot (probably need to make a new class of TicTacToe)
                     # declare class of tictactoe
                     # run play_move method to change board
-
+                new_grid = make_hypothetical_move(grid,move,player_to_play)
+                
                 # get new grid and run minimax function again, and set it to the result (this is where it's getting recursive!)
                     # run minimax again and set it to variable claled result
                     # add item to dictionary: move_dict["score"] = result
+                minimax_result = minimax(new_grid,!player_to_play)
 
+                move_hash[:result] = minimax_result
+
+                moves << move_hash
                 # add dictionary to array of moves
-            
             end
 
             # do the best mvoe stuff
@@ -78,6 +82,16 @@ class AI
             nil
         end
     end
+    
+    def make_hypothetical_move(grid,move,player_to_play)
+
+        tictactoe = TicTacToe.new(grid,player_to_play)
+        
+        tictactoe.play_move(row:move[0],column: move[1])
+        
+    end 
+        
+
 
 
     # def rank_moves(grid)

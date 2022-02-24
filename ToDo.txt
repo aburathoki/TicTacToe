@@ -15,3 +15,11 @@ stdout (output)
 https://www.rubyguides.com/2019/02/ruby-io/
 rspec methods 
 e.g. expect{tictactoe.input}.to output("Player it is your turn").to_stdout
+
+# Notes
+
+### Hashes ####
+
+person = {"name": "Jack", "car": "BMW"}
+person.car => "BMW"
+person.name => "Jack"

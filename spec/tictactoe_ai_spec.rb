@@ -110,16 +110,16 @@ describe AI do
         end
  
         # 3
-        it "exits minimax function" do
-            grid = [
-                ["X","O","X"],
-                ["O","O","X"],
-                ["","","X"]
-            ]
-            ai = AI.new(grid)   
-            minimax_result = ai.minimax(grid, false)
-            expect(minimax_result).not_to eql(nil)
-        end
+        # it "exits minimax function" do
+        #     grid = [
+        #         ["X","O","X"],
+        #         ["O","O","X"],
+        #         ["","","X"]
+        #     ]
+        #     ai = AI.new(grid)   
+        #     minimax_result = ai.minimax(grid, false)
+        #     expect(minimax_result).not_to eql(nil)
+        # end
 
         it "Continues minimax recursion" do
             grid = [
@@ -132,5 +132,43 @@ describe AI do
             expect(minimax_result).to eq(nil)
         end
         
+        it "Ai makes move" do
+            grid = [
+                ["X","O","X"],
+                ["O","",""],
+                ["O","","X"]
+            ]
+            ai = AI.new(grid)  
+
+          ai_moved_grid = ai.make_hypothetical_move(grid,[1,1],false)
+
+          expect(ai_moved_grid).to eq([
+            ["X","O","X"],
+            ["O","O",""],
+            ["O","","X"]
+        ])
 
     end
+
+    it "Ai makes move" do
+        grid = [
+            ["X","O","X"],
+            ["O","",""],
+            ["O","","X"]
+        ]
+        ai = AI.new(grid)  
+
+      ai_moved_grid = ai.make_hypothetical_move(grid,[1,1],false)
+
+      expect(ai_moved_grid).to eq([
+        ["X","O","X"],
+        ["O","O",""],
+        ["O","","X"]
+    ])
+
+end
+
+
+
+
+end
