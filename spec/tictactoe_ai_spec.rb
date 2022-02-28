@@ -125,48 +125,48 @@ describe AI do
             grid = [
                 ["X","O","X"],
                 ["O","",""],
-                ["O","","X"]
+                ["O","X","X"]
             ]
             ai = AI.new(grid)   
             minimax_result = ai.minimax(grid, false)
             expect(minimax_result).to eq(nil)
         end
         
-        it "Ai makes move" do
-            grid = [
-                ["X","O","X"],
-                ["O","",""],
-                ["O","","X"]
-            ]
-            ai = AI.new(grid)  
+    #     it "Ai makes move" do
+    #         grid = [
+    #             ["X","O","X"],
+    #             ["O","",""],
+    #             ["O","","X"]
+    #         ]
+    #         ai = AI.new(grid)  
 
-          ai_moved_grid = ai.make_hypothetical_move(grid,[1,1],false)
+    #       ai_moved_grid = ai.make_hypothetical_move(grid,[1,1],false)
 
-          expect(ai_moved_grid).to eq([
-            ["X","O","X"],
-            ["O","O",""],
-            ["O","","X"]
-        ])
+    #       expect(ai_moved_grid).to eq([
+    #         ["X","O","X"],
+    #         ["O","O",""],
+    #         ["O","","X"]
+    #     ])
 
-    end
+    # end
 
-    it "Ai makes move" do
-        grid = [
-            ["X","O","X"],
-            ["O","",""],
-            ["O","","X"]
-        ]
-        ai = AI.new(grid)  
+    # it "Ai makes move" do
+    #     grid = [
+    #         ["X","O","X"],
+    #         ["O","",""],
+    #         ["O","","X"]
+    #     ]
+    #     ai = AI.new(grid)  
 
-      ai_moved_grid = ai.make_hypothetical_move(grid,[1,1],false)
+    #   ai_moved_grid = ai.make_hypothetical_move(grid,[1,1],false)
 
-      expect(ai_moved_grid).to eq([
-        ["X","O","X"],
-        ["O","O",""],
-        ["O","","X"]
-    ])
+    #   expect(ai_moved_grid).to eq([
+    #     ["X","O","X"],
+    #     ["O","O",""],
+    #     ["O","","X"]
+    # ])
 
-end
+# end
 
 
 
