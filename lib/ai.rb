@@ -56,33 +56,26 @@ class AI
 
             moves = [] # an array of those hashes [{co-ord, score}]
 
-            puts "********** initial grid #{grid}"
-
-            puts "********** available options #{available_moves}"
-
-            
-
             available_moves.each_with_index do |move, index|
                 # we're creating a hash {co-ord, score}
                 move_hash = {}
                 move_hash[:coord] = move
 
-                puts "********** initial grid before making hypothetical move #{grid} #{index}"
-
                 # make move in the avilable move spot (probably need to make a new class of TicTacToe)
                     # declare class of tictactoe
                     # run play_move method to change board
+
+                
                 new_grid = make_hypothetical_move(grid, move,player_to_play)
                 
                 # get new grid and run minimax function again, and set it to the result (this is where it's getting recursive!)
                     # run minimax again and set it to variable claled result
                     # add item to dictionary: move_dict["score"] = result
-                # minimax_result = minimax(new_grid,!player_to_play)
+                minimax_result = minimax(new_grid,!player_to_play)
 
-                # move_hash[:result] = minimax_result
+                move_hash[:result] = minimax_result
 
-                # puts "****** #{index}"
-                # puts "******** #{new_grid} #{move_hash}"
+                puts "********* Result #{move_hash}"
 
                 moves << move_hash
                 # add dictionary to array of moves
@@ -95,13 +88,16 @@ class AI
         end
     end
     
-    def make_hypothetical_move(grid_waiting_for_move,move,player_to_play)
-        tictactoe = TicTacToe.new(grid_waiting_for_move,player_to_play)
-    
-        tictactoe.play_move(row:move[0],column: move[1])
-
-        # puts "******** #{tictactoe.grid}"
+    def make_hypothetical_move(grid,move,player_to_play)
+        cloned_grid = grid.collect(&:dup)
         
+        tictactoe = TicTacToe.new(cloned_grid,player_to_play)
+    
+        final_grid = tictactoe.play_move(row:move[0],column: move[1])
+
+        puts "**********cloned #{final_grid}"
+
+        return final_grid
     end 
         
 

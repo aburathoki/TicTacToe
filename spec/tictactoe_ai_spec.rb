@@ -123,7 +123,7 @@ describe AI do
 
         it "Continues minimax recursion" do
             grid = [
-                ["X","O","X"],
+                ["X","O","O"],
                 ["O","",""],
                 ["O","X","X"]
             ]

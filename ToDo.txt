@@ -6,6 +6,7 @@
    – Game needs to get grid from icTacTo class at end of move
 3) Return to AI!!!!
 
+4) write a test to rank those moves
 
 # Reading stuff
 
@@ -23,3 +24,4 @@ e.g. expect{tictactoe.input}.to output("Player it is your turn").to_stdout
 person = {"name": "Jack", "car": "BMW"}
 person.car => "BMW"
 person.name => "Jack"
+

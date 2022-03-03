@@ -22,17 +22,19 @@
     def verify_move?(row:, column:)
         if @grid[row][column] == ""
             return true
+            
         else 
             return false
         end
-    end
+    end 
+
 
     def verify_win_by_row?
         @grid.each { |row|
             if row.uniq.length == 1
                 if row[0] != ""
                     return true
-                    break
+                    break  
                 end
             end
         }
