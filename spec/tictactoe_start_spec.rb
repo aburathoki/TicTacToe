@@ -12,7 +12,7 @@ describe TicTacToe do
         tictactoe = TicTacToe.new(start_grid_test, true)
         
         # act 0 moves new game
-        initial_grid = tictactoe.return_current_grid
+        initial_grid = tictactoe.grid
         # assert 
         expect(initial_grid).to eq(start_grid_test)
     end

@@ -6,8 +6,28 @@
       @player_to_play = player_to_play
     end
     
-    def return_current_grid
-        @grid
+    def attempt_move(row:, column:)
+        if verify_move?(row: row, column: column)
+            play_move(row: row, column: column)
+            if verify_win?
+                return @player_to_play ? :player_win : :ai_win
+            elsif verify_draw?
+                return :draw
+            else 
+                @player_to_play = !@player_to_play
+                return :next_move
+            end 
+        else 
+            return :illegal_move
+        end
+    end
+
+    def play_move(row:, column:)
+        if @player_to_play
+            player_move(row: row, column: column)
+        else 
+            computer_move(row: row, column: column)
+        end
     end
 
     def addMove(move,row:, column:)
@@ -15,19 +35,21 @@
         return @grid
     end
 
-    def changeGrid(newGrid)
-        @grid = newGrid
+    def player_move(row:, column:)
+        addMove("X",row: row, column: column)
+    end
+
+    def computer_move(row:, column:)
+        addMove("O", row: row, column: column)
     end
 
     def verify_move?(row:, column:)
         if @grid[row][column] == ""
             return true
-            
         else 
             return false
         end
     end 
-
 
     def verify_win_by_row?
         @grid.each { |row|
@@ -64,7 +86,7 @@
             return true
             end
         end
-     false
+        false
     end
 
     def verify_draw?
@@ -76,36 +98,4 @@
         return verify_win_by_row? || verify_win_by_column? || verify_win_by_LR_diagonal?
     end
 
-    def player_move(row:, column:)
-        addMove("X",row: row, column: column)
-    end
-
-    def computer_move(row:, column:)
-        addMove("O", row: row, column: column)
-    end
-  
-    def play_move(row:, column:)
-        if @player_to_play
-            player_move(row: row, column: column)
-        else 
-            computer_move(row: row, column: column)
-        end
-    end
-
-    def attempt_move(row:, column:)
-        if verify_move?(row: row, column: column)
-            play_move(row: row, column: column)
-            if verify_win?
-                return @player_to_play ? :player_win : :ai_win
-            elsif verify_draw?
-                return :draw
-            else 
-                @player_to_play = !@player_to_play
-                return :next_move
-            end 
-        else 
-            return :illegal_move
-        end
-    end
-    
 end
