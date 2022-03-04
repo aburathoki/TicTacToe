@@ -44,48 +44,40 @@ class AI
 
     # https://www.freecodecamp.org/news/how-to-make-your-tic-tac-toe-game-unbeatable-by-using-the-minimax-algorithm-9d690bad4b37/
 
-    def minimax(grid, player_to_play)
+    def minimax(grid, player_to_play, level)
 
 
         result = check_grid_for_terminal(grid, player_to_play)
 
         if result != nil
-            return result
+            result_hash = {}
+            result_hash[:result] = result
+            return result_hash
         else 
             available_moves = get_available_moves(grid)
 
             moves = [] # an array of those hashes [{co-ord, score}]
 
             available_moves.each_with_index do |move, index|
-                # we're creating a hash {co-ord, score}
-                move_hash = {}
+                move_hash = {} # we're creating a hash {co-ord, score}
                 move_hash[:coord] = move
 
-                # make move in the avilable move spot (probably need to make a new class of TicTacToe)
-                    # declare class of tictactoe
-                    # run play_move method to change board
-
-                
+                # make move in the avilable move spot (probably need to make a new class of TicTacToe
                 new_grid = make_hypothetical_move(grid, move,player_to_play)
                 
                 # get new grid and run minimax function again, and set it to the result (this is where it's getting recursive!)
-                    # run minimax again and set it to variable claled result
-                    # add item to dictionary: move_dict["score"] = result
-                minimax_result = minimax(new_grid,!player_to_play)
+                new_level = level + 1
+                minimax_result = minimax(new_grid,!player_to_play, new_level)[:result]
 
                 move_hash[:result] = minimax_result
-
-                puts "********* Result #{move_hash}"
-
                 moves << move_hash
-                # add dictionary to array of moves
             end
-
-            # do the best mvoe stuff
-
-            # return best move
-            nil 
+            puts "********** Level ***** #{level} #{player_to_play ? "Player" : "AI"}"
+            puts "********* MOVES ****** #{moves}"
+            
+            moves[0]
         end
+
     end
     
     def make_hypothetical_move(grid,move,player_to_play)
@@ -95,38 +87,17 @@ class AI
     
         final_grid = tictactoe.play_move(row:move[0],column: move[1])
 
-        puts "**********cloned #{final_grid}"
-
         return final_grid
     end 
-        
 
-
-
-    # def rank_moves(grid)
-    #     move_scores = []
-    #     available_moves = get_available_moves(grid)
-
-    #     available_moves.each do |move|
-    #         tictactoe = TicTacToe.new(grid, false)
-    #         row = move[0]
-    #         column = move[1]
-
-    #         move_result = tictactoe.attempt_move(row: row, column: column)
+    def ranks_available_moves(moves, player_to_play)
+        if player_to_play
             
-    #         if move_result == :ai_win
-    #             move_scores.append(10)
-    #         elsif move_result == :player_win
-    #             move_scores.append(-10)
-    #         elsif move_result == :draw
-    #             move_scores.append(0)
-    #         else 
-    #             move_scores.append(0)
-    #         end
-
-    #     end
-
-    #     return move_scores
-    # end 
+        else
+            moves.max_by { |move|
+                move[:result]
+            }
+        end
+    end
     
 end

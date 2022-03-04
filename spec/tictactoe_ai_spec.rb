@@ -2,39 +2,18 @@ require_relative '../lib/ai'
 
 describe AI do
     
-        # it "gets available moves" do
-        #     grid = [
-        #         ["X","O","O"],
-        #         ["","","O"],
-        #         ["X","O","X"]
-        #     ]
-        #     ai = AI.new(grid)            
+        it "gets available moves" do
+            grid = [
+                ["X","O","O"],
+                ["","","O"],
+                ["X","O","X"]
+            ]
+            ai = AI.new(grid)            
             
-        #     available_moves = ai.get_available_moves(grid)
-        #     expect(available_moves).to eq([[1,0],[1,1]])
-        #     end
+            available_moves = ai.get_available_moves(grid)
+            expect(available_moves).to eq([[1,0],[1,1]])
+            end
         
-        # it "ranks available moves" do
-        #     # arrange
-        #     grid = [
-        #         ["X","O","O"],
-        #         ["","","O"],
-        #         ["X","O","X"]
-        #     ]
-        #     ai = AI.new(grid)    
-        #     available_moves = [[1,0],[1,1]]
-
-        #     #  act
-        #     move_rankings = ai.rank_moves(grid)
-            
-        #     #  assert 
-
-        #     expect(move_rankings).to eq([0,10])
-       
-        # end
-
-
-
         # 1
 
         it "returns the value if the terminal state is found" do 
@@ -113,12 +92,12 @@ describe AI do
         # it "exits minimax function" do
         #     grid = [
         #         ["X","O","X"],
-        #         ["O","O","X"],
+        #         ["X","O","O"],
         #         ["","","X"]
         #     ]
         #     ai = AI.new(grid)   
-        #     minimax_result = ai.minimax(grid, false)
-        #     expect(minimax_result).not_to eql(nil)
+        #     minimax_result = ai.minimax(grid, false, 0)
+        #     expect(minimax_result).to eql({:coord=>[2, 1], :result=>10})
         # end
 
         it "Continues minimax recursion" do
@@ -128,47 +107,65 @@ describe AI do
                 ["O","X","X"]
             ]
             ai = AI.new(grid)   
-            minimax_result = ai.minimax(grid, false)
-            expect(minimax_result).to eq(nil)
+            minimax_result = ai.minimax(grid, false, 0)
+            expect(minimax_result).to eq({:coord=>[1, 1], :result=>10})
         end
         
-    #     it "Ai makes move" do
-    #         grid = [
-    #             ["X","O","X"],
-    #             ["O","",""],
-    #             ["O","","X"]
-    #         ]
-    #         ai = AI.new(grid)  
+        it "Ai makes move" do
+            grid = [
+                ["X","O","X"],
+                ["O","",""],
+                ["O","","X"]
+            ]
+            ai = AI.new(grid)  
 
-    #       ai_moved_grid = ai.make_hypothetical_move(grid,[1,1],false)
+          ai_moved_grid = ai.make_hypothetical_move(grid,[1,1],false)
 
-    #       expect(ai_moved_grid).to eq([
-    #         ["X","O","X"],
-    #         ["O","O",""],
-    #         ["O","","X"]
-    #     ])
+          expect(ai_moved_grid).to eq([
+            ["X","O","X"],
+            ["O","O",""],
+            ["O","","X"]
+        ])
 
-    # end
+        end
 
-    # it "Ai makes move" do
-    #     grid = [
-    #         ["X","O","X"],
-    #         ["O","",""],
-    #         ["O","","X"]
-    #     ]
-    #     ai = AI.new(grid)  
+    it "Ai makes move" do
+        grid = [
+            ["X","O","X"],
+            ["O","",""],
+            ["O","","X"]
+        ]
+        ai = AI.new(grid)  
 
-    #   ai_moved_grid = ai.make_hypothetical_move(grid,[1,1],false)
+        ai_moved_grid = ai.make_hypothetical_move(grid,[1,1],false)
 
-    #   expect(ai_moved_grid).to eq([
-    #     ["X","O","X"],
-    #     ["O","O",""],
-    #     ["O","","X"]
-    # ])
+        expect(ai_moved_grid).to eq([
+            ["X","O","X"],
+            ["O","O",""],
+            ["O","","X"]
+        ])
 
-# end
+    end
 
+    it "ranks available moves" do
+        # Arrange
+        grid = [
+                ["X","O","O"],
+                ["O","",""],
+                ["O","X","X"]
+            ]
+        input = [{:coord=>[1, 1], :result=>10}, {:coord=>[1, 2], :result=>-10}]
+        ai = AI.new(grid)  
 
+        # Act
+        ai_best_move = ai.ranks_available_moves(input, false)
 
+        # Assert
+        expect(ai_best_move).to eq({:coord=>[1, 1], :result=>10})
+
+    end
 
 end
+
+
+
