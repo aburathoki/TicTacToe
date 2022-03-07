@@ -88,28 +88,8 @@ describe AI do
                 )
         end
  
-        # 3
-        # it "exits minimax function" do
-        #     grid = [
-        #         ["X","O","X"],
-        #         ["X","O","O"],
-        #         ["","","X"]
-        #     ]
-        #     ai = AI.new(grid)   
-        #     minimax_result = ai.minimax(grid, false, 0)
-        #     expect(minimax_result).to eql({:coord=>[2, 1], :result=>10})
-        # end
-
-        it "Continues minimax recursion" do
-            grid = [
-                ["X","O","O"],
-                ["O","",""],
-                ["O","X","X"]
-            ]
-            ai = AI.new(grid)   
-            minimax_result = ai.minimax(grid, false, 0)
-            expect(minimax_result).to eq({:coord=>[1, 1], :result=>10})
-        end
+        
+       
         
         it "Ai makes move" do
             grid = [
@@ -165,6 +145,74 @@ describe AI do
 
     end
 
+
+    it "ranks available moves" do 
+     # Arrange
+         grid = [
+            ["X","O","O"],
+            ["","",""],
+            ["O","","X"]
+        ]
+    input = [{:coord=>[1, 1], :result=>10}, {:coord=>[1, 2], :result=>-10},{:coord=>[1,0], :result=>10},{:coord=>[2, 1], :result=>-10}]
+    ai = AI.new(grid)
+    
+    # Act
+    ai_best_move = ai.ranks_available_moves(input, false)
+
+    # Assert
+    expect([{:coord=>[1, 1], :result=>10},{:coord=>[1,0], :result=>10}]).to include(ai_best_move)
+    end 
+
+
+    it "ranks available moves" do 
+        # Arrange
+            grid = [
+               ["X","O","O"],
+               ["","",""],
+               ["O","","X"]
+           ]
+       input = [{:coord=>[1, 1], :result=>-10}, {:coord=>[1, 2], :result=>10},{:coord=>[1,0], :result=>-10},{:coord=>[2, 1], :result=>10}]
+       ai = AI.new(grid)
+       
+       # Act
+       player_best_move = ai.ranks_available_moves(input, true)
+   
+       # Assert
+       expect([{:coord=>[1, 1], :result=>-10},{:coord=>[1,0], :result=>-10}]).to include(player_best_move)
+    end 
+    
+       it "exits minimax function" do
+        grid = [
+            ["X","O","X"],
+            ["X","O","O"],
+            ["","","X"]
+        ]
+        ai = AI.new(grid)   
+        minimax_result = ai.minimax(grid, false, 0)
+        expect(minimax_result).to eql({:coord=>[2, 1],:level=>1, :result=>10})
+    end
+
+    it "Continues minimax recursion" do
+        grid = [
+            ["X","O","O"],
+            ["O","",""],
+            ["O","X","X"]
+        ]
+        ai = AI.new(grid)   
+        minimax_result = ai.minimax(grid, false, 0)
+        expect(minimax_result).to eq({:coord=>[1, 1],:level=>1, :result=>10})
+    end
+   it "Continues minimax recursion" do
+        grid = [
+            ["","","O"],
+            ["","X",""],
+            ["O","",""]
+        ]
+        ai = AI.new(grid)   
+        minimax_result = ai.minimax(grid, false, 0)
+
+        expect([{:coord=>[0, 0], :level=>3, :result=>10}, {:coord=>[2, 2], :level=>3, :result=>10}]).to include(minimax_result)
+    end
 end
 
 

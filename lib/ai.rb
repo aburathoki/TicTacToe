@@ -52,6 +52,7 @@ class AI
         if result != nil
             result_hash = {}
             result_hash[:result] = result
+            result_hash[:level] = level
             return result_hash
         else 
             available_moves = get_available_moves(grid)
@@ -68,14 +69,16 @@ class AI
                 # get new grid and run minimax function again, and set it to the result (this is where it's getting recursive!)
                 new_level = level + 1
                 minimax_result = minimax(new_grid,!player_to_play, new_level)[:result]
+                minimax_level =minimax(new_grid,!player_to_play, new_level)[:level]
 
                 move_hash[:result] = minimax_result
+                move_hash[:level] = minimax_level
                 moves << move_hash
             end
             puts "********** Level ***** #{level} #{player_to_play ? "Player" : "AI"}"
             puts "********* MOVES ****** #{moves}"
             
-            moves[0]
+            ranks_available_moves(moves, player_to_play)
         end
 
     end
@@ -92,12 +95,33 @@ class AI
 
     def ranks_available_moves(moves, player_to_play)
         if player_to_play
-            
+            best_hash = moves.min_by { |move|
+                move[:result]
+            }    
         else
-            moves.max_by { |move|
+            best_hash = moves.max_by { |move|
                 move[:result]
             }
         end
+        best_result = best_hash[:result]
+
+
+       array_of_best_moves = moves.select {|move| move[:result] == best_result }
+      if player_to_play 
+        if best_result < 0 
+            fastest_move = array_of_best_moves.min_by { |move| move[:level]}
+        else
+            fastest_move = array_of_best_moves.max_by { |move| move[:level]}
+        end
+      else 
+        if best_result > 0
+
+        fastest_move = array_of_best_moves.min_by { |move| move[:level]}
+        else
+        fastest_move = array_of_best_moves.max_by { |move| move[:level]}
+        end
+      end
+      array_of_best_moves.select{|move| move[:level] == fastest_move[:level] }.shuffle.first
     end
     
 end
