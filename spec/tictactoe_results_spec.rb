@@ -1,6 +1,6 @@
-require_relative '../lib/tictactoe'
+require_relative '../lib/move'
 
-describe TicTacToe do
+describe Verify do
 
     context "horizontal line wins" do
             
@@ -10,7 +10,7 @@ describe TicTacToe do
                 ["O","O",""],
                 ["","",""]
             ]
-            tictactoe = TicTacToe.new(start_grid_test, true)
+            tictactoe = Verify.new(start_grid_test)
             
             hasPlayerWon = tictactoe.verify_win_by_row?
 
@@ -25,7 +25,7 @@ describe TicTacToe do
                 ["","",""]
             ]
             
-            tictactoe = TicTacToe.new(start_grid_test, true)
+            tictactoe = Verify.new(start_grid_test)
 
             hasPlayerWon = tictactoe.verify_win_by_row?
 
@@ -42,7 +42,7 @@ describe TicTacToe do
                 ["X","O",""],
                 ["X","",""]
             ]
-            tictactoe = TicTacToe.new(start_grid_test, true)
+            tictactoe = Verify.new(start_grid_test)
 
             hasPlayerWon = tictactoe.verify_win_by_column?
 
@@ -58,7 +58,7 @@ describe TicTacToe do
                 ["X","",""]
             ]
 
-            tictactoe = TicTacToe.new(start_grid_test, true)
+            tictactoe = Verify.new(start_grid_test)
 
             hasPlayerWon = tictactoe.verify_win_by_column?
 
@@ -67,6 +67,7 @@ describe TicTacToe do
         end
 
     end
+
     context "diagonal line wins" do
             
         it "checks to see if player has won" do
@@ -76,7 +77,7 @@ describe TicTacToe do
                 ["X","","X"]
             ]
 
-            tictactoe = TicTacToe.new(start_test_grid, true)
+            tictactoe = Verify.new(start_test_grid)
 
             hasPlayerWon = tictactoe.verify_win_by_LR_diagonal?
 
@@ -92,7 +93,7 @@ describe TicTacToe do
                 ["X","","X"]
             ]
 
-            tictactoe = TicTacToe.new(start_test_grid, true)
+            tictactoe = Verify.new(start_test_grid)
 
             hasPlayerWon = tictactoe.verify_win_by_LR_diagonal?
 
@@ -102,71 +103,71 @@ describe TicTacToe do
     end    
 
    context "confirm draw" do 
-    it "checks to see if game drawn" do
-        start_test_grid = [
-            ["X","X","O"],
-            ["O","O","X"],
-            ["X","O","X"]
-        ]
+        it "checks to see if game drawn" do
+            start_test_grid = [
+                ["X","X","O"],
+                ["O","O","X"],
+                ["X","O","X"]
+            ]
 
-        tictactoe = TicTacToe.new(start_test_grid, true)
+            tictactoe = Verify.new(start_test_grid)
 
-        game_drawn = tictactoe.verify_draw?
+            game_drawn = tictactoe.verify_draw?
 
-        expect(game_drawn).to eq(true)
+            expect(game_drawn).to eq(true)
 
+        end
+
+        it "checks to see if game drawn" do
+            start_test_grid = [
+                ["X","X","O"],
+                ["O","O","X"],
+                ["X","O",""]
+            ]
+
+            tictactoe = Verify.new(start_test_grid)
+
+            game_drawn = tictactoe.verify_draw?
+
+            expect(game_drawn).to eq(false)
+
+        end
     end
 
-    it "checks to see if game drawn" do
-        start_test_grid = [
-            ["X","X","O"],
-            ["O","O","X"],
-            ["X","O",""]
-        ]
+    context "confirm win" do 
+        it "checks to see if game won" do
 
-        tictactoe = TicTacToe.new(start_test_grid, true)
+            start_test_grid = [
+                ["X","X","O"],
+                ["O","O","O"],
+                ["X","O","X"]
+            ]
 
-        game_drawn = tictactoe.verify_draw?
+            tictactoe = Verify.new(start_test_grid)
 
-        expect(game_drawn).to eq(false)
+            game_won = tictactoe.verify_win?
 
-    end
-end
+            expect(game_won).to eq(true)
 
-context "confirm win" do 
-    it "checks to see if game won" do
+        end
 
-        start_test_grid = [
-            ["X","X","O"],
-            ["O","O","O"],
-            ["X","O","X"]
-        ]
+        it "checks to see if game won" do
 
-        tictactoe = TicTacToe.new(start_test_grid, true)
+            start_test_grid = [
+                ["X","X","O"],
+                ["O","O",""],
+                ["X","O",""]
+            ]
 
-        game_won = tictactoe.verify_win?
+            tictactoe = Verify.new(start_test_grid)
 
-        expect(game_won).to eq(true)
+            game_won = tictactoe.verify_win?
 
-    end
+            expect(game_won).to eq(false)
 
-    it "checks to see if game won" do
-
-        start_test_grid = [
-            ["X","X","O"],
-            ["O","O",""],
-            ["X","O",""]
-        ]
-
-        tictactoe = TicTacToe.new(start_test_grid, true)
-
-        game_won = tictactoe.verify_win?
-
-        expect(game_won).to eq(false)
+        end
 
     end
-
-end
 
 
 end

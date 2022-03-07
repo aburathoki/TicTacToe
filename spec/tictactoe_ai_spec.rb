@@ -147,14 +147,14 @@ describe AI do
 
 
     it "ranks available moves" do 
-     # Arrange
+        # Arrange
          grid = [
             ["X","O","O"],
             ["","",""],
             ["O","","X"]
         ]
-    input = [{:coord=>[1, 1], :result=>10}, {:coord=>[1, 2], :result=>-10},{:coord=>[1,0], :result=>10},{:coord=>[2, 1], :result=>-10}]
-    ai = AI.new(grid)
+        input = [{:coord=>[1, 1], :result=>10}, {:coord=>[1, 2], :result=>-10},{:coord=>[1,0], :result=>10},{:coord=>[2, 1], :result=>-10}]
+        ai = AI.new(grid)
     
     # Act
     ai_best_move = ai.ranks_available_moves(input, false)
