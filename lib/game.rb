@@ -35,9 +35,27 @@ class Game
 
     end
 
-    # Create GridView class 
-      #(switch statement converting coord to number)
-      # different colours gray, computer in red, player in blue
+    def attempt_player_move(player_input)
+      input_coord = convert_to_coord(player_input)
+      if input_coord != nil
+        move = Move.new(@grid, @player_to_play)
+        move.attempt_move(row: input_coord[0], column: input_coord[1])
+      else
+        :illegal_move
+      end
+    end
+  
+    def convert_to_coord(input)
 
+      input_int = input.to_i
 
+      if input_int == nil || input_int > 9 || input_int < 1
+        return nil
+      else 
+        row = (input_int - 1) / 3
+        column = (input_int - 1) % 3
+
+        return [row, column]
+      end
+    end
 end
