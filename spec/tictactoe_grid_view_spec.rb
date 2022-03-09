@@ -1,4 +1,4 @@
-require_relative '../lib/grid.rb'
+require_relative '../lib/grid_view'
 require 'colorize' 
 
 

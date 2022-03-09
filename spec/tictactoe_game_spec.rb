@@ -1,9 +1,7 @@
-require_relative '../lib/game'
+require_relative '../lib/game_controller'
 
 
 describe Game do
-
-   
 
     it 'converts input to co-ord' do
 
@@ -15,6 +13,7 @@ describe Game do
 
         expect(converted_input).to eq([0,1])
     end
+
     it 'attempt move with user input' do
 
         game = Game.new
@@ -26,5 +25,14 @@ describe Game do
         expect(verify_input).to eq(:next_move)
     end
   
+    it "enters AI move" do
+
+        game = Game.new
+
+        ai_outome = game.attempt_ai_move
+
+        expect(ai_outome).to eq(:next_move)
+
+    end
 
 end

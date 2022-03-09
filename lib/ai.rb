@@ -28,8 +28,10 @@ class AI
                 
                 new_level = level + 1
 
-                move_hash[:result] = minimax(new_grid,!player_to_play, new_level)[:result]
-                move_hash[:level] = minimax(new_grid,!player_to_play, new_level)[:level]
+                minimax_result = minimax(new_grid,!player_to_play, new_level)
+
+                move_hash[:result] = minimax_result[:result]
+                move_hash[:level] = minimax_result[:level]
 
                 moves << move_hash
             end
@@ -37,7 +39,6 @@ class AI
         end
 
     end
-
 
     def check_grid_for_terminal(grid,player_to_play) 
         verify = Verify.new(grid)

@@ -202,7 +202,8 @@ describe AI do
         minimax_result = ai.minimax(grid, false, 0)
         expect(minimax_result).to eq({:coord=>[1, 1],:level=>1, :result=>10})
     end
-   it "Continues minimax recursion" do
+    
+    it "Continues minimax recursion" do
         grid = [
             ["","","O"],
             ["","X",""],
