@@ -1,5 +1,5 @@
 require_relative  '../lib/move'
-
+require_relative  '../lib/verify'
 class AI
 
     attr_accessor :grid, :tictactoe

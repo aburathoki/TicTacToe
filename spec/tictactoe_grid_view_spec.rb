@@ -36,7 +36,7 @@ describe GridView do
         grid_view = GridView.new(grid_state)
         grid_at_end =  %{
 
- 1 | O | X
+ 1 | #{"O".yellow} | #{"X".cyan}
 --- --- ---
  4 | 5 | 6
 --- --- ---

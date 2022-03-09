@@ -1,3 +1,5 @@
+require_relative '../lib/grid_view'
+
 class Instruct
 
     def initialize(grid_state)
@@ -30,7 +32,7 @@ class Instruct
         puts 'It is a draw. Game over.'
     end
 
-    def say_player_has_won
+    def say_player_wins
         @grid_view.display
         puts 'You have won!'
     end

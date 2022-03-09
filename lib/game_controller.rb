@@ -1,5 +1,6 @@
 require_relative '../lib/instruct_view'
-
+require_relative '../lib/move'
+require_relative '../lib/ai'
 class Game
 
     attr_accessor :grid, :player_to_play
@@ -10,36 +11,17 @@ class Game
           ["","",""],
           ["","",""]
         ]
-      @player_to_play = true
+      @player_to_play = false
     end
 
     def main
-      # 1) presenting the grid
-      # 2) asks for player input
-      # 3) Verify the move
-          # a) Ask them to make another
-          # b) accept move and make it
-      # 4) Check for terminal grid
-
-      ## if false ##
-
-        # 5) ASk AI class for move
-        # 6) Make the move for the AI
-        # 7) Check for terminal grid
-
-      ## if false ##
-
-        # 8) Run main again
-
-      ## if true ##
-
-        # 8) show grid, and ask if they want to play again
-
+      respond_to_game_stage(:next_move)
     end
 
     def respond_to_game_stage(stage)
       case stage
       when :next_move
+        @player_to_play = !@player_to_play
         if @player_to_play
           player_input = Instruct.new(@grid).ask_for_player_move
           new_stage = attempt_player_move(player_input)
@@ -49,9 +31,15 @@ class Game
           respond_to_game_stage(ai_move_outcome)
         end
       when :illegal_move
+         player_input = Instruct.new(@grid).ask_for_another_move_after_invalid_move
+         new_stage = attempt_player_move(player_input)
+         respond_to_game_stage(new_stage)
       when :player_win
+         Instruct.new(@grid).say_player_wins
       when :ai_win
+          Instruct.new(@grid).say_ai_wins
       when :draw
+          Instruct.new(@grid).say_it_is_a_draw
       end
     end
 

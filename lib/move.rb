@@ -19,7 +19,6 @@ class Move
             elsif verify.verify_draw?
                 return :draw
             else 
-                @player_to_play = !@player_to_play
                 return :next_move
             end 
         else 

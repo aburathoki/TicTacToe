@@ -157,28 +157,6 @@ describe Move do
         expect(computer_move).to eq(attempted_computer_move)
     end
 
-    it "changes player turn after move" do
-        start_test_grid = [
-                ["","",""],
-                ["","",""],
-                ["","",""]
-            ]
-        tictactoe = Move.new(start_test_grid, true)
-        attempted_move = tictactoe.attempt_move(row:0, column:0)
-        expect(tictactoe.player_to_play).to eq(false)
-    end
-
-    it "changes player turn" do
-        start_test_grid = [
-                ["X","",""],
-                ["","",""],
-                ["","",""]
-            ]
-        tictactoe = Move.new(start_test_grid, false)
-        attempted_move = tictactoe.attempt_move(row:0, column:1)
-        expect(tictactoe.player_to_play).to eq(true)
-    end
-
     it " doesn't change player turn in invalid move" do
         
         start_test_grid = [

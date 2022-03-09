@@ -33,7 +33,11 @@ class GridView
         for i in 0..@grid_items.count-1
             
             if flatten_grid[i] != ""
-                @grid_items[i] = flatten_grid[i]
+              if flatten_grid[i] =='X'
+                @grid_items[i] = flatten_grid[i].cyan
+              else
+                @grid_items[i] = flatten_grid[i].yellow
+              end
             end
 
         end 
