@@ -1,5 +1,4 @@
-require_relative '../lib/game_controller'
-
+require_relative '../lib/controller/game_controller'
 
 describe Game do
 

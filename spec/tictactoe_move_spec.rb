@@ -1,4 +1,4 @@
-require_relative '../lib/move'
+require_relative '../lib/model/move'
 
 describe Move do
 
@@ -155,18 +155,6 @@ describe Move do
         ]
         computer_move = tictactoe.play_move(row:1, column:1)
         expect(computer_move).to eq(attempted_computer_move)
-    end
-
-    it " doesn't change player turn in invalid move" do
-        
-        start_test_grid = [
-            ["X","O",""],
-            ["","",""],
-            ["","",""]
-        ]
-        tictactoe = Move.new(start_test_grid, false)
-        attempted_move = tictactoe.attempt_move(row:0, column:1)
-        expect(tictactoe.player_to_play).to eq(false)
     end
 
     it "returns win symbol for player" do

@@ -1,4 +1,4 @@
-require_relative '../lib/ai'
+require_relative '../lib/model/ai'
 
 describe AI do
     

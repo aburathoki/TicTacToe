@@ -1,16 +1,15 @@
-require_relative '../lib/grid_view'
+require_relative '../lib/view/grid_view'
 require 'colorize' 
 
-
 describe GridView do
-    it 'displays the starting grid' do
-        grid_state = [
-            ["","",""],
-            ["","",""],
-            ["","",""]
-          ]
-        grid_view = GridView.new(grid_state)
-        grid_at_start =  %{
+  it 'displays the starting grid' do
+      grid_state = [
+          ["","",""],
+          ["","",""],
+          ["","",""]
+        ]
+      grid_view = GridView.new(grid_state)
+      grid_at_start =  %{
 
  1 | 2 | 3
 --- --- ---
@@ -20,21 +19,21 @@ describe GridView do
 
 }
 
-        game_start = grid_view.display()
+      game_start = grid_view.display()
 
-        expect(game_start).to eq(grid_at_start)
+      expect(game_start).to eq(grid_at_start)
 
-    end
+  end
 
 
-    it 'displays full grid' do
-        grid_state = [
-            ["","O","X"],
-            ["","",""],
-            ["","",""]
-          ]
-        grid_view = GridView.new(grid_state)
-        grid_at_end =  %{
+  it 'displays full grid' do
+      grid_state = [
+          ["","O","X"],
+          ["","",""],
+          ["","",""]
+        ]
+      grid_view = GridView.new(grid_state)
+      grid_at_end =  %{
 
  1 | #{"O".yellow} | #{"X".cyan}
 --- --- ---
@@ -44,9 +43,9 @@ describe GridView do
 
 }
 
-        game_in_play = grid_view.display
+      game_in_play = grid_view.display
 
-        expect(game_in_play).to eq(grid_at_end)
-    end 
+      expect(game_in_play).to eq(grid_at_end)
+  end 
 
 end

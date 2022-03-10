@@ -1,4 +1,4 @@
-require_relative '../lib/move'
+require_relative '../lib/model/move'
 
 describe Verify do
 
