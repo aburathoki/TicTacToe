@@ -1,3 +1,4 @@
+1
 require_relative '../../lib/view/instruct_view'
 require_relative '../../lib/model/move'
 require_relative '../../lib/model/ai'
@@ -59,9 +60,7 @@ class Game
     def convert_to_coord(input)
       input_int = input.to_i
 
-      if input_int == nil || input_int > 9 || input_int < 1
-        nil
-      else 
+      if input_int > 0 && input_int < 10
         row = (input_int - 1) / 3
         column = (input_int - 1) % 3
         [row, column]

@@ -2,6 +2,28 @@ require_relative '../lib/controller/game_controller'
 
 describe Game do
 
+    it 'returns nil when converting bad number' do
+
+        game = Game.new
+
+        player_input = "10"
+
+        converted_input = game.convert_to_coord(player_input)
+
+        expect(converted_input).to eq(nil)
+    end
+
+    it 'returns nil when given letter' do
+
+        game = Game.new
+
+        player_input = "A"
+
+        converted_input = game.convert_to_coord(player_input)
+
+        expect(converted_input).to eq(nil)
+    end
+
     it 'converts input to co-ord' do
 
         game = Game.new

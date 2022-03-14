@@ -26,7 +26,7 @@ describe GridView do
   end
 
 
-  it 'displays full grid' do
+  it 'displays the full grid with colour' do
       grid_state = [
           ["","O","X"],
           ["","",""],

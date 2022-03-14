@@ -2,9 +2,7 @@ require_relative  '../../lib/model/move'
 require_relative  '../../lib/model/verify'
 
 class AI
-
-    attr_accessor :grid, :tictactoe
-
+  
     def initialize(grid)
         @grid = grid
     end 
@@ -13,23 +11,17 @@ class AI
         result = check_grid_for_terminal(grid, player_to_play)
 
         if result != nil
-            result_hash = {}
-            result_hash[:result] = result
-            result_hash[:level] = level
-            return result_hash
+            {:result => result, :level => level}
         else 
             available_moves = get_available_moves(grid)
             moves = []
 
-            available_moves.each_with_index do |move, index|
-                move_hash = {}
-                move_hash[:coord] = move
-
+            available_moves.each do |move|
+                move_hash = {:coord => move}
+               
                 new_grid = make_hypothetical_move(grid, move,player_to_play)
                 
-                new_level = level + 1
-
-                minimax_result = minimax(new_grid,!player_to_play, new_level)
+                minimax_result = minimax(new_grid,!player_to_play, level + 1)
 
                 move_hash[:result] = minimax_result[:result]
                 move_hash[:level] = minimax_result[:level]
@@ -45,35 +37,41 @@ class AI
         verify = Verify.new(grid)
 
         if verify.verify_win? 
-            return player_to_play ? 10 : -10
+            player_to_play ? 10 : -10
         elsif verify.verify_draw?
-            return 0
+            0
         end
-
     end
 
     def get_available_moves(grid)
         available_moves =[]
 
-        for i in 0..2 
-            for x in 0..2 
-                if grid[i][x] == ""
-                    available_moves.append([i, x])  
+        grid.each_with_index do |row, i|
+            row.each_with_index do |cell, j|
+                if grid[i][j] == ""
+                    available_moves.append([i, j])  
                 end
             end
         end 
-        return available_moves
+        available_moves
     end
     
     def make_hypothetical_move(grid,move,player_to_play)
         cloned_grid = grid.collect(&:dup)
         
-        tictactoe = Move.new(cloned_grid,player_to_play)
+        tictactoe_move = Move.new(cloned_grid,player_to_play)
     
-        tictactoe.play_move(row:move[0],column: move[1])
+        tictactoe_move.play_move(row:move[0],column: move[1])
     end 
 
     def ranks_available_moves(moves, player_to_play)
+        best_result = get_best_result(moves, player_to_play)
+        best_moves = moves.select {|move| move[:result] == best_result }
+        fastest_move = get_best_level(best_moves,player_to_play,best_result)
+        best_moves.select{|move| move[:level] == fastest_move }.shuffle.first
+    end
+    
+    def get_best_result(moves, player_to_play) 
         if player_to_play
             best_hash = moves.min_by { |move|
                 move[:result]
@@ -83,22 +81,14 @@ class AI
                 move[:result]
             }
         end
-        best_result = best_hash[:result]
-        array_of_best_moves = moves.select {|move| move[:result] == best_result }
-        if player_to_play 
-            if best_result < 0 
-                fastest_move = array_of_best_moves.min_by { |move| move[:level]}
-            else
-                fastest_move = array_of_best_moves.max_by { |move| move[:level]}
-            end
-        else 
-            if best_result > 0
-                fastest_move = array_of_best_moves.min_by { |move| move[:level]}
-            else
-                fastest_move = array_of_best_moves.max_by { |move| move[:level]}
-            end
-        end
-        array_of_best_moves.select{|move| move[:level] == fastest_move[:level] }.shuffle.first
+        best_hash[:result]
     end
-    
+
+    def get_best_level(moves,player_to_play,best_result)
+        if player_to_play == best_result < 0
+            fastest_move = moves.min_by { |move| move[:level]}[:level] 
+        else 
+            fastest_move = moves.max_by { |move| move[:level]}[:level]
+        end
+    end
 end
