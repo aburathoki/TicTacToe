@@ -16,7 +16,7 @@ describe Move do
                 ["","",""]
             ]
             
-            grid_after_first_move = move_class.addMove("X", row: 0, column: 0)
+            grid_after_first_move = move_class.add_move("X", row: 0, column: 0)
         
             expect(grid_after_first_move).to eq(exepected_grid_after_first_move)
         end
@@ -34,7 +34,7 @@ describe Move do
                 ["","",""],
                 ["","",""]
             ]
-            grid_after_second_move = move_class.addMove("O", row: 0, column: 1)
+            grid_after_second_move = move_class.add_move("O", row: 0, column: 1)
     
             expect(grid_after_second_move).to eq(exepected_grid_after_first_move)
         end
@@ -53,7 +53,7 @@ describe Move do
                 ["","","O"]
             ]
             
-            grid_after_second_move = move_class.addMove("O", row: 2, column: 2)
+            grid_after_second_move = move_class.add_move("O", row: 2, column: 2)
             expect(grid_after_second_move).to eq(expected_grid_after_second_move)
     
         end

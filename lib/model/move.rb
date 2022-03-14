@@ -38,14 +38,14 @@ class Move
     end
 
     def player_move(row:, column:)
-        addMove("X",row: row, column: column)
+        add_move("X",row: row, column: column)
     end
 
     def computer_move(row:, column:)
-        addMove("O", row: row, column: column)
+        add_move("O", row: row, column: column)
     end
 
-    def addMove(move,row:, column:)
+    def add_move(move,row:, column:)
         @grid[row][column] = move
         return @grid
     end
