@@ -30,7 +30,7 @@ describe AI do
                     [1,0],[1,1], [1,2],
                     [2,0],[2,1], [2,2]
                 ]
-                )
+            )
         end
     end
 
@@ -43,7 +43,7 @@ describe AI do
             ]
             ai = AI.new(grid)
             
-            score = ai.check_grid_for_terminal(grid,true)
+            score = ai.check_grid_for_terminal(grid,true,0)
     
             expect(score).to eq(10)
         end
@@ -56,7 +56,7 @@ describe AI do
             ]
             ai = AI.new(grid)
             
-            score = ai.check_grid_for_terminal(grid,false)
+            score = ai.check_grid_for_terminal(grid,false,0)
     
             expect(score).to eq(-10)
         end
@@ -69,7 +69,7 @@ describe AI do
             ]
             ai = AI.new(grid)
             
-            score = ai.check_grid_for_terminal(grid,false)
+            score = ai.check_grid_for_terminal(grid,false,0)
     
             expect(score).to eq(0)
         end
@@ -82,7 +82,7 @@ describe AI do
             ]
             ai = AI.new(grid)
             
-            score = ai.check_grid_for_terminal(grid,false)
+            score = ai.check_grid_for_terminal(grid,false,0)
     
             expect(score).to eq(nil)
         end
@@ -181,7 +181,7 @@ describe AI do
     
             minimax_result = ai.minimax(grid, false, 0)
     
-            expect(minimax_result).to eql({:coord=>[2, 1],:level=>1, :result=>10})
+            expect(minimax_result).to eql({:coord=>[2, 1],:level=>1, :result=>9})
         end
     
         it "returns best AI move according to minimax" do
@@ -194,7 +194,7 @@ describe AI do
             
             minimax_result = ai.minimax(grid, false, 0)
             
-            expect(minimax_result).to eq({:coord=>[1, 1],:level=>1, :result=>10})
+            expect(minimax_result).to eq({:coord=>[1, 1],:level=>1, :result=>9})
         end
         
         it "returns best AI move according to minimax" do
@@ -207,7 +207,7 @@ describe AI do
             
             minimax_result = ai.minimax(grid, false, 0)
     
-            expect([{:coord=>[0, 0], :level=>3, :result=>10}, {:coord=>[2, 2], :level=>3, :result=>10}]).to include(minimax_result)
+            expect([{:coord=>[0, 0], :level=>3, :result=>7}, {:coord=>[2, 2], :level=>3, :result=>7}]).to include(minimax_result)
         end
     end
 end

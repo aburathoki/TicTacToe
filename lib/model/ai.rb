@@ -8,7 +8,7 @@ class AI
     end 
 
     def minimax(grid, player_to_play, level)
-        result = check_grid_for_terminal(grid, player_to_play)
+        result = check_grid_for_terminal(grid, player_to_play, level)
 
         if result != nil
             {:result => result, :level => level}
@@ -33,18 +33,18 @@ class AI
 
     end
 
-    def check_grid_for_terminal(grid,player_to_play) 
+    def check_grid_for_terminal(grid,player_to_play, level) 
         verify = Verify.new(grid)
 
         if verify.verify_win? 
-            player_to_play ? 10 : -10
+            player_to_play ? 10 - level : -10 + level
         elsif verify.verify_draw?
             0
         end
     end
 
     def get_available_moves(grid)
-        available_moves =[]
+        available_moves = []
 
         grid.each_with_index do |row, i|
             row.each_with_index do |cell, j|
@@ -58,17 +58,13 @@ class AI
     
     def make_hypothetical_move(grid,move,player_to_play)
         cloned_grid = grid.collect(&:dup)
-        
         tictactoe_move = Move.new(cloned_grid,player_to_play)
-    
         tictactoe_move.play_move(row:move[0],column: move[1])
     end 
 
     def ranks_available_moves(moves, player_to_play)
         best_result = get_best_result(moves, player_to_play)
-        best_moves = moves.select {|move| move[:result] == best_result }
-        fastest_move = get_best_level(best_moves,player_to_play,best_result)
-        best_moves.select{|move| move[:level] == fastest_move }.shuffle.first
+        best_moves = moves.select {|move| move[:result] == best_result }.shuffle.first
     end
     
     def get_best_result(moves, player_to_play) 
@@ -84,11 +80,4 @@ class AI
         best_hash[:result]
     end
 
-    def get_best_level(moves,player_to_play,best_result)
-        if player_to_play == best_result < 0
-            fastest_move = moves.min_by { |move| move[:level]}[:level] 
-        else 
-            fastest_move = moves.max_by { |move| move[:level]}[:level]
-        end
-    end
 end

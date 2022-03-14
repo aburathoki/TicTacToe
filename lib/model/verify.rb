@@ -9,7 +9,15 @@ class Verify
     end
 
     def verify_win_by_row?
-        @grid.each { |row|
+        verify_win_in_a_line?(@grid)
+    end
+
+    def verify_win_by_column?
+        verify_win_in_a_line?(@grid.transpose)
+    end
+
+    def verify_win_in_a_line?(grid)
+        grid.each { |row|
             if row.uniq.length == 1
                 if row[0] != ""
                     return true
@@ -17,21 +25,6 @@ class Verify
                 end
             end
         }
-        return false
-    end
-
-    def verify_win_by_column?
-        for i in 0..2
-            column = [
-                @grid[0][i], @grid[1][i], @grid[2][i]
-            ]
-            if column.uniq.length == 1
-                if column[0] != ""
-                    return true
-                    break
-                end
-            end
-        end
         return false
     end
 
