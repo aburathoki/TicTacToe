@@ -5,7 +5,7 @@ require_relative '../../lib/model/ai'
 
 class Game
 
-    attr_accessor :grid, :player_to_play
+    attr_accessor :grid
 
     def initialize
       @grid = [

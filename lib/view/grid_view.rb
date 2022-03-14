@@ -2,7 +2,6 @@ require 'colorize'
 
 class GridView
 
-    attr_accessor :grid, :grid_state, :grid_items
     def initialize(grid_state)
         @grid_state = grid_state 
         @grid_items = [1,2,3,4,5,6,7,8,9]
